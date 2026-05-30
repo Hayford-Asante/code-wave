@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Code Wave I.T Training School</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --secondary: #f97316;
+      --background: #0f172a; /* Sleek dark-mode primary background */
+      --surface: #1e293b;    /* High-contrast surface panel */
+      --surface-light: #334155;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --border: #334155;
+      --header-height: 80px;
+      --glow: rgba(37, 99, 235, 0.15);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.7;
+      color: var(--text);
+      background: var(--background);
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    /* --- SCROLL REVEAL ANIMATIONS --- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    section {
+      scroll-margin-top: var(--header-height);
+    }
+
+    header {
+      background: rgba(15, 23, 42, 0.8);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: var(--header-height);
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-decoration: none;
+      z-index: 110;
+    }
+
+    .logo-icon {
+      width: 48px;
+      height: 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: #ffffff;
+      box-shadow: 0 0 20px rgba(37, 99, 235, 0.4);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .logo-icon::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+      transform: rotate(45deg);
+      animation: shine 4s infinite linear;
+    }
+
+    @keyframes shine {
+      0% { transform: translate(-50%, -50%) rotate(45deg); }
+      100% { transform: translate(50%, 50%) rotate(45deg); }
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.05;
+    }
+
+    .brand-text span {
+      font-size: 1.2rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      color: #ffffff;
+    }
+
+    .brand-text small {
+      color: var(--muted);
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: 0.1rem;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.6rem;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--muted);
+      font-weight: 600;
+      position: relative;
+      padding: 0.5rem 0;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: #ffffff;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary);
+      transition: width 0.3s ease;
+      box-shadow: 0 0 8px var(--primary);
+    }
+
+    .nav-links a.active::after {
+      width: 100%;
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: var(--text);
+      cursor: pointer;
+      z-index: 110;
+      padding: 0.5rem;
+    }
+
+    /* --- HERO AREA WITH ANIMATED BG & REAL IMAGE --- */
+    .hero {
+      position: relative;
+      background: radial-gradient(circle at top left, rgba(37,99,235,0.15), transparent 45%), 
+                  radial-gradient(circle at bottom right, rgba(249,115,22,0.08), transparent 40%);
+      padding: 8rem 2rem 6rem;
+      overflow: hidden;
+    }
+
+    /* Animated CSS Particle Wave Background */
+    .hero-wave-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('https://encrypted-tbn1.gstatic.com/licensed-image?q=tbn:ANd9GcQUgz9L-I0OShJAU6kyTKUY-Sxm5vQk_Ud9iH7nUdclLOkfkP2dEDcJIqfWhICWH7u_onvDRnzftFugCZI');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.04;
+      pointer-events: none;
+      animation: pulseBg 10s infinite ease-in-out;
+    }
+
+    @keyframes pulseBg {
+      0%, 100% { transform: scale(1); opacity: 0.04; }
+      50% { transform: scale(1.05); opacity: 0.06; }
+    }
+
+    .hero-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 4rem;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-copy h1 {
+      font-size: clamp(2.8rem, 5vw, 4.2rem);
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      font-weight: 800;
+      background: linear-gradient(to right, #ffffff, #cbd5e1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-copy p {
+      color: var(--muted);
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+      border: none;
+      border-radius: 14px;
+      padding: 1rem 2rem;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: #ffffff;
+      box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 30px rgba(37, 99, 235, 0.5);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.03);
+      color: #ffffff;
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateY(-2px);
+    }
+
+    .hero-image-frame {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Glow Ring Effect Behind Image Container */
+    .hero-image-frame::after {
+      content: '';
+      position: absolute;
+      width: 105%;
+      height: 105%;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border-radius: 32px;
+      z-index: 1;
+      opacity: 0.2;
+      filter: blur(20px);
+      animation: rotateGlow 8s infinite linear;
+    }
+
+    @keyframes rotateGlow {
+      0% { filter: blur(25px) hue-rotate(0deg); }
+      100% { filter: blur(25px) hue-rotate(360deg); }
+    }
+
+    .hero-img-element {
+      width: 100%;
+      max-width: 500px;
+      border-radius: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+      z-index: 2;
+      object-fit: cover;
+      transform: perspective(1000px) rotateY(-8px) rotateX(4px);
+      transition: transform 0.5s ease;
+    }
+
+    .hero-image-frame:hover .hero-img-element {
+      transform: perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1.02);
+    }
+
+    /* --- STATS PANEL --- */
+    .stats-section {
+      padding: 5rem 2rem;
+      background: rgba(30, 41, 59, 0.5);
+      border-y: 1px solid var(--border);
+    }
+
+    .stats-grid {
+      max-width: 1200px;
+      margin: 2.5rem auto 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 2.5rem 1.8rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(37, 99, 235, 0.4);
+    }
+
+    .stat-card h3 {
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .stat-card strong {
+      display: block;
+      font-size: 3.2rem;
+      color: #ffffff;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      background: linear-gradient(45deg, #ffffff, var(--primary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* --- CONTENT GENERAL STYLING --- */
+    .section {
+      padding: 7rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 0.75rem;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .section-heading {
+      text-align: center;
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      margin-bottom: 1rem;
+      font-weight: 800;
+    }
+
+    .section-text {
+      text-align: center;
+      max-width: 650px;
+      margin: 0 auto 4rem;
+      color: var(--muted);
+    }
+
+    /* --- COURSES / CARDS GRID --- */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 2.5rem 2rem;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      border-color: rgba(37, 99, 235, 0.3);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3), 0 0 30px var(--glow);
+    }
+
+    .card-icon {
+      width: 60px;
+      height: 60px;
+      display: grid;
+      place-items: center;
+      background: rgba(37, 99, 235, 0.15);
+      color: var(--primary);
+      border-radius: 16px;
+      margin-bottom: 1.5rem;
+      font-size: 1.5rem;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover .card-icon {
+      transform: scale(1.1) rotate(5deg);
+      background: var(--primary);
+      color: #ffffff;
+    }
+
+    .card h3 {
+      margin-bottom: 1rem;
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    /* --- CONTEXTUAL PICTURE PLACEMENTS --- */
+    .split-visual-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      margin-top: 4rem;
+    }
+
+    .embedded-graphics-frame {
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      position: relative;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+
+    .embedded-graphics-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+
+    .split-visual-container:hover .embedded-graphics-frame img {
+      transform: scale(1.04);
+    }
+
+    .features-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.2rem;
+      background: var(--surface);
+      padding: 1.5rem;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      transition: border-color 0.3s ease;
+    }
+
+    .feature-item:hover {
+      border-color: rgba(249, 115, 22, 0.3);
+    }
+
+    .feature-item i {
+      font-size: 1.4rem;
+      color: var(--secondary);
+      background: rgba(249, 115, 22, 0.1);
+      padding: 0.75rem;
+      border-radius: 12px;
+    }
+
+    .feature-item h4 {
+      margin-bottom: 0.35rem;
+      font-size: 1.1rem;
+    }
+
+    .feature-item p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    /* --- TRAINERS --- */
+    .trainers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .trainer-card {
+      background: var(--surface);
+      border-radius: 24px;
+      border: 1px solid var(--border);
+      padding: 2.5rem 2rem;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .trainer-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .trainer-avatar {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: rgba(37, 99, 235, 0.1);
+      display: grid;
+      place-items: center;
+      color: var(--primary);
+      margin: 0 auto 1.5rem;
+      font-size: 2.2rem;
+      border: 2px dashed var(--primary);
+    }
+
+    .trainer-name {
+      font-weight: 700;
+      font-size: 1.2rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .trainer-role {
+      color: var(--secondary);
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 1.2rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .trainer-bio {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    /* --- ADMISSIONS --- */
+    .admissions-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .admission-card {
+      background: var(--surface);
+      padding: 3rem 2.5rem;
+      border-radius: 28px;
+      border: 1px solid var(--border);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    }
+
+    .admission-card h3 {
+      margin-bottom: 1.5rem;
+      font-size: 1.4rem;
+    }
+
+    .admission-card ul {
+      list-style: none;
+    }
+
+    .admission-card li {
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      color: var(--muted);
+    }
+
+    .admission-card li i {
+      color: var(--primary);
+      background: rgba(37,99,235,0.1);
+      padding: 0.4rem;
+      border-radius: 50%;
+      font-size: 0.8rem;
+    }
+
+    /* --- CONTACT --- */
+    .contact-card {
+      background: var(--surface);
+      padding: 3.5rem 2.5rem;
+      border-radius: 28px;
+      border: 1px solid var(--border);
+      max-width: 700px;
+      margin: 0 auto;
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.4);
+    }
+
+    .contact-group {
+      display: grid;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-group input,
+    .contact-group textarea {
+      width: 100%;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      padding: 1.1rem 1.3rem;
+      font-size: 1rem;
+      color: #ffffff;
+      background: var(--background);
+      transition: all 0.3s ease;
+    }
+
+    .contact-group input:focus,
+    .contact-group textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 15px rgba(37,99,235,0.2);
+    }
+
+    .contact-group textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    /* --- FOOTER --- */
+    .footer {
+      background: #020617;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      padding: 5rem 2rem 2rem;
+    }
+
+    .footer-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 3rem;
+    }
+
+    .footer-grid h4 {
+      color: #ffffff;
+      margin-bottom: 1.25rem;
+      font-size: 1.1rem;
+    }
+
+    .footer-link,
+    .footer-text {
+      color: var(--muted);
+      text-decoration: none;
+      display: block;
+      margin-bottom: 0.85rem;
+      font-size: 0.95rem;
+      transition: color 0.3s ease;
+    }
+
+    .footer-link:hover {
+      color: var(--primary);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.9rem;
+    }
+
+    /* --- RESPONSIVE WORKFLOWS --- */
+    @media (max-width: 1024px) {
+      .hero-grid,
+      .split-visual-container {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+      .hero-copy {
+        text-align: center;
+      }
+      .hero-copy p {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .hero-actions {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        max-width: 300px;
+        height: 100vh;
+        background: var(--surface);
+        box-shadow: -10px 0 40px rgba(0,0,0,0.5);
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        padding: 6rem 2.5rem;
+        gap: 2rem;
+        transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        z-index: 105;
+      }
+
+      .nav-links.open {
+        right: 0;
+      }
+
+      .nav-links a {
+        font-size: 1.2rem;
+        width: 100%;
+      }
+
+      .nav-links a::after {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="nav-container">
+      <a href="#home" class="brand">
+        <div class="logo-icon">
+          <i class="fa-solid fa-code"></i>
+          <i class="fa-solid fa-wave-square"></i>
+        </div>
+        <div class="brand-text">
+          <span>Code Wave</span>
+          <small>I.T Training School</small>
+        </div>
+      </a>
+      
+      <button class="menu-toggle" aria-label="Toggle Navigation Menu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+
+      <nav class="nav-links">
+        <a href="#home" class="active">Home</a>
+        <a href="#stats">Stats</a>
+        <a href="#courses">Courses</a>
+        <a href="#why">Why Choose Us</a>
+        <a href="#trainers">Trainers</a>
+        <a href="#admissions">Admissions</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO SECTION -->
+    <section id="home" class="hero">
+      <div class="hero-wave-bg"></div>
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <p class="section-title">Practical Tech Education</p>
+          <h1>Forge Your Professional Future in Technology</h1>
+          <p>Code Wave I.T Training School engineers comprehensive, hands-on instructional programs in Accra and Kasoa. Acquire cutting-edge competencies in software development, core systems architecture, and security infrastructures.</p>
+          <div class="hero-actions">
+            <button class="btn-primary" onclick="document.getElementById('admissions').scrollIntoView({ behavior: 'smooth' })">Begin Application</button>
+            <button class="btn-secondary" onclick="document.getElementById('courses').scrollIntoView({ behavior: 'smooth' })">Explore Tracks</button>
+          </div>
+        </div>
+        <div class="hero-image-frame">
+          <img src="https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcQaW3Er-qfHvGIrPKbGkRmtuPvGGtKduEN8BQm6G0o5oRrVw1u28rOU-MuoqVelI2x1zMnHe6u2YN2-8aE" alt="Students writing lines of web development code inside a modern computer learning laboratory room environment" class="hero-img-element">
+        </div>
+      </div>
+    </section>
+
+    <!-- COUNTER SECTION -->
+    <section id="stats" class="stats-section">
+      <div class="reveal">
+        <p class="section-title">Metrics of Excellence</p>
+        <h2 class="section-heading">Institutional Benchmarks</h2>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <h3>Graduations Scheduled</h3>
+            <strong class="stat-counter" data-target="33">0</strong>
+          </div>
+          <div class="stat-card">
+            <h3>Certified Alumni</h3>
+            <strong class="stat-counter" data-target="42576">0</strong>
+          </div>
+          <div class="stat-card">
+            <h3>Academic Tracks</h3>
+            <strong class="stat-counter" data-target="46">0</strong>
+          </div>
+          <div class="stat-card">
+            <h3>Active Campuses</h3>
+            <strong class="stat-counter" data-target="3">0</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COURSES SECTION -->
+    <section id="courses" class="section">
+      <div class="reveal">
+        <p class="section-title">Curriculum Offerings</p>
+        <h2 class="section-heading">Professional Career Tracks</h2>
+        <p class="section-text">Rigorous curriculum pathways formulated to scale completely absolute beginners to workforce ready proficiency levels.</p>
+        <div class="cards-grid">
+          <div class="card">
+            <div class="card-icon"><i class="fa-solid fa-code"></i></div>
+            <h3>Full-Stack Web Development</h3>
+            <p>Master interface engineering architectures utilizing structural layouts, programmatic visual logical formatting, and high-level execution script runtime languages.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon"><i class="fa-solid fa-network-wired"></i></div>
+            <h3>Network Infrastructure</h3>
+            <p>Implement core operational frameworks, topology routing, packet protocols, and managed local system architectures.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon"><i class="fa-solid fa-shield-halved"></i></div>
+            <h3>Information Security</h3>
+            <p>Deconstruct vulnerability models, deploy proactive perimeter protocols, mitigation controls, and encryption structures.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon"><i class="fa-solid fa-laptop-code"></i></div>
+            <h3>Professional Dev Ecosystems</h3>
+            <p>Configure industry standard version pipeline branches, diagnostic testing, terminal runlines, and clean workspace isolation environments.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY CHOOSE US SECTION WITH ACCESSIBLE SPLIT IMAGE -->
+    <section id="why" class="section" style="background: rgba(30,41,59,0.25); width: 100vw; max-width: none;">
+      <div style="max-width: 1200px; margin: 0 auto;" class="reveal">
+        <p class="section-title">Strategic Value</p>
+        <h2 class="section-heading">The Code Wave Architecture</h2>
+        <p class="section-text">Why ambitious tech aspirants invest their engineering education timeline with our training facility resources.</p>
+        
+        <div class="split-visual-container">
+          <div class="embedded-graphics-frame">
+            <img src="https://encrypted-tbn1.gstatic.com/licensed-image?q=tbn:ANd9GcQl-XfauHI_jXED5dXZZJvwJwrsyU1Gzgc0av1DdeEZA3VyafrE4hA_0SKZ37qPSzDy1oL3r55u1nUYxUo" alt="African schoolgirl writing code lines on a laptop next to system whiteboard algorithm designs">
+          </div>
+          <div class="features-list">
+            <div class="feature-item">
+              <i class="fa-solid fa-chalkboard-user"></i>
+              <div>
+                <h4>Production Scale Portfolio Execution</h4>
+                <p>Deploy live codebase solutions to remote server pages rather than absorbing stagnant, non-applicable literature.</p>
+              </div>
+            </div>
+            <div class="feature-item">
+              <i class="fa-solid fa-people-arrows"></i>
+              <div>
+                <h4>Granular Mentorship Directives</h4>
+                <p>Limited laboratory enrollment density preserves direct troubleshooting access blocks with master instructors.</p>
+              </div>
+            </div>
+            <div class="feature-item">
+              <i class="fa-solid fa-briefcase"></i>
+              <div>
+                <h4>Enterprise Readiness Preparation</h4>
+                <p>Simulate workforce interface loops, build clean operational assets, and run technical screening rehearsals.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRAINERS SECTION -->
+    <section id="trainers" class="section">
+      <div class="reveal">
+        <p class="section-title">Instructional Officers</p>
+        <h2 class="section-heading">Meet the Engineering Mentors</h2>
+        <p class="section-text">Learn alongside industry engineers vetted for professional execution capabilities and academic articulation clarity.</p>
+        <div class="trainers-grid">
+          <div class="trainer-card">
+            <div class="trainer-avatar"><i class="fa-solid fa-user-tie"></i></div>
+            <p class="trainer-name">Mr. Kofi Mensah</p>
+            <p class="trainer-role">Principal Interface Engineer</p>
+            <p class="trainer-bio">7+ years production runtime execution. Architect of responsive systems workflows and client integration layers.</p>
+          </div>
+          <div class="trainer-card">
+            <div class="trainer-avatar"><i class="fa-solid fa-user-shield"></i></div>
+            <p class="trainer-name">Ms. Ama Osei</p>
+            <p class="trainer-role">Infrastructural Threat Analyst</p>
+            <p class="trainer-bio">Enterprise perimeter defence professional teaching risk assessment matrices and routing compliance layers.</p>
+          </div>
+          <div class="trainer-card">
+            <div class="trainer-avatar"><i class="fa-solid fa-user-gear"></i></div>
+            <p class="trainer-name">Mr. John Agyekum</p>
+            <p class="trainer-role">Systems Operations Architect</p>
+            <p class="trainer-bio">Specialist in configuration automation pipeline processes, shell directives, and local network diagnostics.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ADMISSIONS SECTION -->
+    <section id="admissions" class="section" style="background: rgba(30,41,59,0.5); width: 100vw; max-width: none;">
+      <div style="max-width: 1200px; margin: 0 auto;" class="reveal">
+        <p class="section-title">Enrollment Portals</p>
+        <h2 class="section-heading">Begin Your Technical Cohort Pathway</h2>
+        <p class="section-text">Review structural track deliverables and secure your position matrix inside our upcoming program block.</p>
+        <div class="admissions-grid">
+          <div class="admission-card">
+            <h3>Deliverable Provisions</h3>
+            <ul>
+              <li><i class="fa-solid fa-check"></i> Synchronous structural training runtimes</li>
+              <li><i class="fa-solid fa-check"></i> Verified Institutional Proficiency Credentials</li>
+              <li><i class="fa-solid fa-check"></i> Developer asset building portfolio review loops</li>
+              <li><i class="fa-solid fa-check"></i> Persistent archive access indexes for lifetime review</li>
+            </ul>
+          </div>
+          <div class="admission-card">
+            <h3>Onboarding Milestones</h3>
+            <ul>
+              <li><i class="fa-solid fa-check"></i> Electronic portal profile ingestion</li>
+              <li><i class="fa-solid fa-check"></i> Track assessment consultation interview</li>
+              <li><i class="fa-solid fa-check"></i> Workspace stack configuration provisioning</li>
+              <li><i class="fa-solid fa-check"></i> Cohort launch runtime operationalization</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="section">
+      <div class="reveal">
+        <p class="section-title">Inquiry Channels</p>
+        <h2 class="section-heading">Connect with an Advisor</h2>
+        <p class="section-text">Dispatch parameters below to clarify financial routing frameworks, custom scheduling options, or equipment requirements.</p>
+        <div class="contact-card">
+          <div class="contact-group">
+            <input type="text" placeholder="Identity / Full Name">
+          </div>
+          <div class="contact-group">
+            <input type="email" placeholder="Communication Email Address">
+          </div>
+          <div class="contact-group">
+            <input type="tel" placeholder="Mobile Verification String (Phone)">
+          </div>
+          <div class="contact-group">
+            <textarea placeholder="Describe your targeted educational milestones or current technical background profile..."></textarea>
+          </div>
+          <button class="btn-primary" style="width: 100%;">Transmit Inquiry Data</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-grid">
+      <div>
+        <h4>Code Wave I.T Training School</h4>
+        <p>Providing functional technical workspace preparation and deep technology competency pathways across West Africa.</p>
+      </div>
+      <div>
+        <h4>Academic Portals</h4>
+        <a href="#courses" class="footer-link">Syllabus Index</a>
+        <a href="#trainers" class="footer-link">Faculty Registry</a>
+        <a href="#admissions" class="footer-link">Registration Pipelines</a>
+        <a href="#contact" class="footer-link">Support Desk</a>
+      </div>
+      <div>
+        <h4>Communications</h4>
+        <p class="footer-text">Email: <a href="mailto:hayford718@gmail.com" style="color: #cbd5e1; text-decoration: none;">hayford718@gmail.com</a></p>
+        <p class="footer-text">Infoline: +233 534 396 434</p>
+        <p class="footer-text">Headquarters: Kasoa - Accra Highway, Ghana</p>
+      </div>
+      <div>
+        <h4>Digital Registry Repositories</h4>
+        <div style="display: flex; gap: 1rem; margin-top: 0.75rem; font-size: 1.2rem;">
+          <a href="https://github.com/hayford-Asante" target="_blank" class="footer-link"><i class="fa-brands fa-github"></i></a>
+          <a href="https://linkedin.com/" target="_blank" class="footer-link"><i class="fa-brands fa-linkedin"></i></a>
+          <a href="https://twitter.com/" target="_blank" class="footer-link"><i class="fa-brands fa-x-twitter"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">&copy; 2026 Code Wave I.T Training School. Programmed using semantic web engineering components. All Rights Reserved.</div>
+  </footer>
+
+  <script>
+    // --- 1. Mobile Menu Toggling ---
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinksContainer = document.querySelector('.nav-links');
+    const navLinks = document.querySelectorAll('.nav-links a');
+
+    menuToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      navLinksContainer.classList.toggle('open');
+      const isOpen = navLinksContainer.classList.contains('open');
+      menuToggle.innerHTML = isOpen ? '<i class="fa-solid fa-xmark"></i>' : '<i class="fa-solid fa-bars"></i>';
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!navLinksContainer.contains(e.target) && !menuToggle.contains(e.target)) {
+        navLinksContainer.classList.remove('open');
+        menuToggle.innerHTML = '<i class="fa-solid fa-bars"></i>';
+      }
+    });
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        navLinksContainer.classList.remove('open');
+        menuToggle.innerHTML = '<i class="fa-solid fa-bars"></i>';
+      });
+    });
+
+    // --- 2. Menu Link Section Tracking Observer ---
+    const sections = document.querySelectorAll('section');
+    const scrollObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const currentId = entry.target.getAttribute('id');
+          navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${currentId}`) {
+              link.classList.add('active');
+            }
+          });
+        }
+      });
+    }, { root: null, rootMargin: '-30% 0px -50% 0px', threshold: 0 });
+
+    sections.forEach(section => scrollObserver.observe(section));
+
+    // --- 3. Scroll Reveal Engine ---
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+          revealObserver.unobserve(entry.target); // Trigger animation once
+        }
+      });
+    }, { threshold: 0.1 });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    // --- 4. Counter Metrics Execution ---
+    const counterObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const counters = entry.target.querySelectorAll('.stat-counter');
+          counters.forEach(counter => {
+            const target = parseInt(counter.getAttribute('data-target'));
+            const duration = 2000;
+            const startTime = Date.now();
+
+            const animate = () => {
+              const elapsed = Date.now() - startTime;
+              const progress = Math.min(elapsed / duration, 1);
+              const current = Math.floor(progress * target);
+              
+              counter.textContent = current.toLocaleString();
+              
+              if (progress < 1) {
+                requestAnimationFrame(animate);
+              }
+            };
+            animate();
+          });
+          counterObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2, rootMargin: '0px 0px -50px 0px' });
+
+    const statsSection = document.getElementById('stats');
+    if (statsSection) {
+      counterObserver.observe(statsSection);
+    }
+  </script>
+</body>
+</html>
