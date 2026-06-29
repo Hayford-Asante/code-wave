@@ -99,6 +99,15 @@
       overflow: hidden;
     }
 
+    .logo-image {
+      width: 48px;
+      height: 48px;
+      display: block;
+      border-radius: 12px;
+      object-fit: contain;
+      background: transparent;
+    }
+
     .logo-icon::before {
       content: '';
       position: absolute;
@@ -472,6 +481,7 @@
       box-shadow: 0 20px 40px rgba(0,0,0,0.4);
       aspect-ratio: 4 / 3;
       min-height: 320px;
+      max-width: 100%;
     }
 
     .embedded-graphics-frame img {
@@ -480,10 +490,27 @@
       object-fit: cover;
       display: block;
       transition: transform 0.6s ease;
+      object-position: center center;
+      max-width: 100%;
     }
 
-    .split-visual-container:hover .embedded-graphics-frame img {
-      transform: scale(1.04);
+    @media (hover: hover) and (pointer: fine) {
+      .split-visual-container:hover .embedded-graphics-frame img {
+        transform: scale(1.04);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .split-visual-container {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      .embedded-graphics-frame {
+        min-height: 220px;
+      }
+      .embedded-graphics-frame img {
+        object-position: center top;
+      }
     }
 
     .features-list {
@@ -766,8 +793,7 @@
     <div class="nav-container">
       <a href="#home" class="brand">
         <div class="logo-icon">
-          <i class="fa-solid fa-code"></i>
-          <i class="fa-solid fa-wave-square"></i>
+          <img src="./shortcut-script-app.png" alt="Code Wave logo" class="logo-image">
         </div>
         <div class="brand-text">
           <span>Code Wave</span>
@@ -877,7 +903,7 @@
         
         <div class="split-visual-container">
           <div class="embedded-graphics-frame">
-            <img src="pexels-xingyan-423290909-15429294.jpg" alt="Student learning coding concepts in a modern classroom">
+            <img src="./pexels-mizunokozuki-12903149.jpg" alt="Student learning coding concepts in a modern classroom">
           </div>
           <div class="features-list">
             <div class="feature-item">
